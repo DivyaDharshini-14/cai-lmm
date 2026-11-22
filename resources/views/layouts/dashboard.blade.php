@@ -22,6 +22,7 @@
                         <a class="btn btn-secondary" href="{{ route('leads.index') }}">Registered leads</a>
                         <a class="btn btn-secondary" href="{{ route('organizations.index') }}">Organizations</a>
                         <a class="btn btn-secondary" href="{{ route('branches.index') }}">Branches</a>
+                        <a class="btn btn-secondary" href="{{ route('employees.index') }}">Employees</a>
                         <form method="post" action="{{ route('logout') }}">
                             @csrf
                             <button class="btn btn-secondary" type="submit">Sign out</button>

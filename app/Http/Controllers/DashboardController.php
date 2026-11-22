@@ -31,4 +31,9 @@ class DashboardController extends Controller
     {
         return view('branches.index');
     }
+
+    public function employees(): View
+    {
+        return view('employees.index');
+    }
 }
