@@ -46,7 +46,7 @@ export async function api(url, { method = 'GET', data, signal } = {}) {
         422: 'Check the highlighted fields and try again.',
         429: 'Too many requests. Wait a moment and try again.',
     };
-    const error = new Error(messages[response.status] ?? 'The workspace could not complete the request. Try again.');
+    const error = new Error(payload?.message ?? messages[response.status] ?? 'The workspace could not complete the request. Try again.');
     error.status = response.status;
     error.fields = response.status === 422 ? payload?.errors : undefined;
     throw error;

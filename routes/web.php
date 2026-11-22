@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\LeadOptionController;
+use App\Http\Controllers\OrganizationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -16,11 +18,19 @@ Route::middleware(['auth', 'cache.headers:private;no_store'])->group(function ()
     Route::get('/', [DashboardController::class, 'create'])->name('leads.create');
     Route::get('/leads', [DashboardController::class, 'index'])->name('leads.index');
     Route::get('/leads/{lead}/edit', [DashboardController::class, 'edit'])->name('leads.edit');
+    Route::get('/organizations', [DashboardController::class, 'organizations'])->name('organizations.index');
+    Route::get('/branches', [DashboardController::class, 'branches'])->name('branches.index');
 
     // These same-origin JSON routes use the web session and CSRF middleware.
     Route::prefix('api')->name('api.')->group(function () {
         Route::get('/lead-options', LeadOptionController::class)->name('lead-options');
         Route::apiResource('leads', LeadController::class)->except('update');
         Route::put('/leads/{lead}', [LeadController::class, 'update'])->name('leads.update');
+
+        Route::apiResource('organizations', OrganizationController::class)->except('update');
+        Route::put('/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+
+        Route::apiResource('branches', BranchController::class)->except('update');
+        Route::put('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
     });
 });
